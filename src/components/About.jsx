@@ -17,10 +17,10 @@ export default function About() {
   const { personal, highlights } = portfolioData;
 
   const iconMap = {
-    Layout: <Code2 size={24} className="highlight-icon cyan" />,
-    Layers: <Layers size={24} className="highlight-icon purple" />,
-    Database: <Database size={24} className="highlight-icon emerald" />,
-    Sparkles: <Sparkles size={24} className="highlight-icon amber" />
+    Layout: <Code2 size={22} className="highlight-icon cyan" />,
+    Layers: <Layers size={22} className="highlight-icon purple" />,
+    Database: <Database size={22} className="highlight-icon emerald" />,
+    Sparkles: <Sparkles size={22} className="highlight-icon amber" />
   };
 
   return (
@@ -29,7 +29,7 @@ export default function About() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <User size={14} />
+            <User size={13} />
             <span>Discover My Journey</span>
           </div>
           <h2 className="section-title">
@@ -53,7 +53,7 @@ export default function About() {
                   <h3 className="about-name-label">{personal.name}</h3>
                   <span className="about-role-label">{personal.role}</span>
                   <div className="about-edu-tag">
-                    <GraduationCap size={14} className="text-cyan" />
+                    <GraduationCap size={13} className="text-cyan flex-shrink-0" />
                     <span>MCA Scholar &bull; Kalasalingam University</span>
                   </div>
                 </div>
@@ -99,11 +99,15 @@ export default function About() {
                 </div>
                 <div className="info-item">
                   <span className="info-key">Email:</span>
-                  <span className="info-val email-val">{personal.email}</span>
+                  <a href={`mailto:${personal.email}`} className="info-val email-val hover:text-cyan transition-colors">
+                    {personal.email}
+                  </a>
                 </div>
                 <div className="info-item">
                   <span className="info-key">Phone:</span>
-                  <span className="info-val">{personal.phone}</span>
+                  <a href={`tel:${personal.phone.replace(/[^0-9+]/g, '')}`} className="info-val hover:text-cyan transition-colors">
+                    {personal.phone}
+                  </a>
                 </div>
               </div>
             </div>
@@ -115,7 +119,7 @@ export default function About() {
               {highlights.map((item, index) => (
                 <div key={index} className="glass-card highlight-card">
                   <div className="highlight-icon-wrapper">
-                    {iconMap[item.icon] || <Sparkles size={24} />}
+                    {iconMap[item.icon] || <Sparkles size={22} />}
                   </div>
                   <h4 className="highlight-title">{item.title}</h4>
                   <p className="highlight-desc">{item.desc}</p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Heart, Code2, Mail, Phone, MapPin } from 'lucide-react';
+import { ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function Footer({ onOpenResume }) {
@@ -26,7 +26,7 @@ export default function Footer({ onOpenResume }) {
               Frontend &amp; Software Developer specializing in React.js, React Native, and Enterprise Systems.
             </p>
             <div className="footer-location-tag">
-              <MapPin size={14} />
+              <MapPin size={14} className="flex-shrink-0 text-cyan" />
               <span>Madurai, Tamil Nadu, India</span>
             </div>
           </div>
@@ -49,16 +49,16 @@ export default function Footer({ onOpenResume }) {
             <h4 className="footer-col-title">Direct Reach</h4>
             <div className="footer-contact-items">
               <a href={personal.social.email} className="footer-contact-link">
-                <Mail size={15} />
-                <span>{personal.email}</span>
+                <Mail size={15} className="flex-shrink-0 text-cyan" />
+                <span className="break-all">{personal.email}</span>
               </a>
               <a href={personal.social.phone} className="footer-contact-link">
-                <Phone size={15} />
+                <Phone size={15} className="flex-shrink-0 text-emerald" />
                 <span>{personal.phone}</span>
               </a>
             </div>
             <div className="footer-btn-wrap">
-              <button onClick={onOpenResume} className="btn btn-secondary btn-sm">
+              <button onClick={onOpenResume} className="btn btn-secondary btn-sm w-full sm:w-auto justify-center">
                 View Formatted Resume
               </button>
             </div>
@@ -70,12 +70,12 @@ export default function Footer({ onOpenResume }) {
         {/* Footer Bottom Bar */}
         <div className="footer-bottom-bar">
           <p className="copyright-text">
-            &copy; {new Date().getFullYear()} <strong>Gopinath P</strong>. Designed &amp; Developed with React.js.
+            &copy; {new Date().getFullYear()} <strong>Gopinath P</strong>. Designed &amp; Developed with React &amp; Tailwind CSS.
           </p>
 
           <button onClick={scrollToTop} className="back-to-top-btn" title="Back to top">
             <span>Back to top</span>
-            <ArrowUp size={16} />
+            <ArrowUp size={15} />
           </button>
         </div>
       </div>

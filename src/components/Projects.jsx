@@ -20,13 +20,13 @@ export default function Projects() {
   const getProjectIcon = (id) => {
     switch (id) {
       case 'manufacturing-erp':
-        return <Workflow size={32} className="project-feature-icon cyan" />;
+        return <Workflow size={28} className="project-feature-icon cyan" />;
       case 'healthcare-ai-chatbot':
-        return <Bot size={32} className="project-feature-icon purple" />;
+        return <Bot size={28} className="project-feature-icon purple" />;
       case 'smart-bus-tracking':
-        return <Bus size={32} className="project-feature-icon emerald" />;
+        return <Bus size={28} className="project-feature-icon emerald" />;
       default:
-        return <Layers size={32} className="project-feature-icon" />;
+        return <Layers size={28} className="project-feature-icon" />;
     }
   };
 
@@ -36,7 +36,7 @@ export default function Projects() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <FolderGit2 size={14} />
+            <FolderGit2 size={13} />
             <span>Featured Portfolio</span>
           </div>
           <h2 className="section-title">
@@ -63,7 +63,13 @@ export default function Projects() {
 
               {/* Card Header */}
               <div className="project-card-top">
-                <div className="project-icon-box" style={{ borderColor: `${project.accentColor}40`, backgroundColor: `${project.accentColor}15` }}>
+                <div 
+                  className="project-icon-box" 
+                  style={{ 
+                    borderColor: `${project.accentColor}40`, 
+                    backgroundColor: `${project.accentColor}15` 
+                  }}
+                >
                   {getProjectIcon(project.id)}
                 </div>
                 <div className="project-meta">
@@ -104,7 +110,7 @@ export default function Projects() {
                   className="btn btn-secondary btn-sm w-full project-btn"
                 >
                   <span>View Full Architecture</span>
-                  <ArrowUpRight size={16} />
+                  <ArrowUpRight size={15} />
                 </button>
               </div>
             </div>

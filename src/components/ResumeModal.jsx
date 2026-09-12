@@ -1,32 +1,45 @@
-import React from 'react';
-import { X, Printer, Download, Mail, Phone, MapPin, Award, BookOpen, Layers, CheckCircle } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { X, Printer, Mail, Phone, MapPin } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function ResumeModal({ onClose }) {
-  const { personal, education, projects, skills } = portfolioData;
+  const { personal, education, projects } = portfolioData;
+
+  // Lock body scroll when resume modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
 
   const handlePrint = () => {
     window.print();
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div 
         className="modal-content resume-modal-content"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar (Hidden on print) */}
         <div className="resume-modal-topbar no-print">
-          <div className="resume-topbar-left">
-            <span className="resume-doc-title">Resume Document &bull; Gopinath P</span>
+          <div className="resume-topbar-left truncate mr-2">
+            <span className="resume-doc-title truncate">Resume Document &bull; Gopinath P</span>
           </div>
-          <div className="resume-topbar-actions">
+          <div className="resume-topbar-actions flex-shrink-0">
             <button onClick={handlePrint} className="btn btn-primary btn-sm">
-              <Printer size={16} />
-              <span>Print / Save as PDF</span>
+              <Printer size={15} />
+              <span className="hidden xs:inline">Print / PDF</span>
             </button>
             <button onClick={onClose} className="modal-close-btn" aria-label="Close resume">
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
@@ -44,15 +57,15 @@ export default function ResumeModal({ onClose }) {
             </div>
             <div className="resume-header-right">
               <div className="resume-contact-line">
-                <Phone size={13} />
+                <Phone size={13} className="flex-shrink-0" />
                 <span>{personal.phone}</span>
               </div>
               <div className="resume-contact-line">
-                <Mail size={13} />
-                <span>{personal.email}</span>
+                <Mail size={13} className="flex-shrink-0" />
+                <span className="break-all">{personal.email}</span>
               </div>
               <div className="resume-contact-line">
-                <MapPin size={13} />
+                <MapPin size={13} className="flex-shrink-0" />
                 <span>29/107, North Street, Keelamatayan, Madurai</span>
               </div>
             </div>

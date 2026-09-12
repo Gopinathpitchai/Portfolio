@@ -8,7 +8,7 @@ export default function Navbar({ onOpenResume }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
 
       const sections = ['hero', 'about', 'skills', 'projects', 'education', 'contact'];
       const scrollPosition = window.scrollY + 200;
@@ -26,9 +26,32 @@ export default function Navbar({ onOpenResume }) {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Handle ESC key to close mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -81,11 +104,11 @@ export default function Navbar({ onOpenResume }) {
             className="btn btn-secondary btn-sm resume-btn"
             title="View & Print Resume"
           >
-            <FileText size={16} />
+            <FileText size={15} />
             <span>Resume</span>
           </button>
           <a href="#contact" className="btn btn-primary btn-sm hire-btn">
-            <Send size={15} />
+            <Send size={14} />
             <span>Connect</span>
           </a>
 
@@ -93,37 +116,77 @@ export default function Navbar({ onOpenResume }) {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="mobile-toggle"
-            aria-label="Toggle navigation menu"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}>
+        <div 
+          className="mobile-menu-overlay" 
+          onClick={() => setMobileMenuOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
           <div className="mobile-menu-panel" onClick={(e) => e.stopPropagation()}>
-            <ul className="mobile-nav-list">
-              {navLinks.map((link) => (
-                <li key={link.name}>
+            <div>
+              {/* Drawer Header */}
+              <div className="mobile-menu-header">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full border border-cyan overflow-hidden">
+                    <img src="/profile.jpg" alt="Gopinath P" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-heading font-bold text-white text-sm">Gopinath P</span>
+                    <span className="text-cyan text-xs font-mono">React Developer</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-menu-close"
+                  aria-label="Close menu"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Drawer Links */}
+              <ul className="mobile-nav-list">
+                <li>
                   <a
-                    href={link.href}
+                    href="#hero"
                     onClick={handleNavClick}
-                    className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                    className={`mobile-nav-link ${activeSection === 'hero' ? 'active' : ''}`}
                   >
-                    {link.name}
+                    Home
                   </a>
                 </li>
-              ))}
-            </ul>
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      onClick={handleNavClick}
+                      className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Drawer Bottom Actions */}
             <div className="mobile-menu-actions">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenResume();
                 }}
-                className="btn btn-secondary w-full"
+                className="btn btn-secondary w-full justify-center"
               >
                 <FileText size={16} />
                 <span>View Full Resume</span>
@@ -131,7 +194,7 @@ export default function Navbar({ onOpenResume }) {
               <a
                 href="#contact"
                 onClick={handleNavClick}
-                className="btn btn-primary w-full"
+                className="btn btn-primary w-full justify-center"
               >
                 <Send size={16} />
                 <span>Get In Touch</span>

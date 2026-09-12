@@ -7,9 +7,7 @@ import {
   Copy, 
   Check, 
   MessageSquare, 
-  Clock, 
-  Sparkles,
-  ExternalLink
+  Clock
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { portfolioData } from '../data/portfolioData';
@@ -51,8 +49,8 @@ export default function Contact({ onShowToast }) {
       // Trigger celebration confetti
       try {
         confetti({
-          particleCount: 80,
-          spread: 70,
+          particleCount: 70,
+          spread: 60,
           origin: { y: 0.7 }
         });
       } catch (err) {
@@ -65,7 +63,7 @@ export default function Contact({ onShowToast }) {
         subject: '',
         message: ''
       });
-    }, 1000);
+    }, 900);
   };
 
   return (
@@ -74,7 +72,7 @@ export default function Contact({ onShowToast }) {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <MessageSquare size={14} />
+            <MessageSquare size={13} />
             <span>Let's Connect</span>
           </div>
           <h2 className="section-title">
@@ -91,11 +89,11 @@ export default function Contact({ onShowToast }) {
             {/* Email Card */}
             <div className="glass-card contact-card">
               <div className="contact-card-icon cyan">
-                <Mail size={22} />
+                <Mail size={20} />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Email Me</span>
-                <a href={personal.social.email} className="contact-card-val">
+                <a href={personal.social.email} className="contact-card-val" title={personal.email}>
                   {personal.email}
                 </a>
               </div>
@@ -105,14 +103,14 @@ export default function Contact({ onShowToast }) {
                 title="Copy Email"
                 aria-label="Copy Email"
               >
-                {copiedKey === 'Email' ? <Check size={16} className="text-green" /> : <Copy size={16} />}
+                {copiedKey === 'Email' ? <Check size={15} className="text-emerald" /> : <Copy size={15} />}
               </button>
             </div>
 
             {/* Phone Card */}
             <div className="glass-card contact-card">
               <div className="contact-card-icon emerald">
-                <Phone size={22} />
+                <Phone size={20} />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Call / WhatsApp</span>
@@ -126,14 +124,14 @@ export default function Contact({ onShowToast }) {
                 title="Copy Phone"
                 aria-label="Copy Phone"
               >
-                {copiedKey === 'Phone number' ? <Check size={16} className="text-green" /> : <Copy size={16} />}
+                {copiedKey === 'Phone number' ? <Check size={15} className="text-emerald" /> : <Copy size={15} />}
               </button>
             </div>
 
             {/* Location Card */}
             <div className="glass-card contact-card">
               <div className="contact-card-icon purple">
-                <MapPin size={22} />
+                <MapPin size={20} />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Location / Address</span>
@@ -156,7 +154,7 @@ export default function Contact({ onShowToast }) {
                 Open to relocation and remote positions.
               </p>
               <div className="response-time">
-                <Clock size={14} />
+                <Clock size={13} />
                 <span>Typical response time: Within 24 hours</span>
               </div>
             </div>
@@ -202,7 +200,7 @@ export default function Contact({ onShowToast }) {
                   <input
                     id="subject"
                     type="text"
-                    placeholder="e.g. Frontend Developer Opportunity / Collaboration"
+                    placeholder="e.g. Frontend Developer Role / Collaboration"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="form-input"
@@ -214,7 +212,7 @@ export default function Contact({ onShowToast }) {
                   <textarea
                     id="message"
                     required
-                    rows={5}
+                    rows={4}
                     placeholder="Write your message here..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -225,13 +223,13 @@ export default function Contact({ onShowToast }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn btn-primary btn-glow w-full submit-btn"
+                  className="btn btn-primary btn-glow w-full submit-btn justify-center"
                 >
                   {isSubmitting ? (
                     <span>Sending Message...</span>
                   ) : (
                     <>
-                      <Send size={18} />
+                      <Send size={16} />
                       <span>Send Message</span>
                     </>
                   )}

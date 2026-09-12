@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Calendar, Award, Building, Sparkles, CheckCircle } from 'lucide-react';
+import { GraduationCap, Calendar, Award, Building } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function Education() {
@@ -11,7 +11,7 @@ export default function Education() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <GraduationCap size={14} />
+            <GraduationCap size={13} />
             <span>Academic Background</span>
           </div>
           <h2 className="section-title">
@@ -31,7 +31,7 @@ export default function Education() {
               {/* Timeline Node Icon */}
               <div className="timeline-node">
                 <div className="timeline-node-inner">
-                  <GraduationCap size={16} />
+                  <GraduationCap size={15} />
                 </div>
               </div>
 
@@ -41,18 +41,18 @@ export default function Education() {
                   <div className="degree-title-group">
                     <h3 className="timeline-degree">{item.degree}</h3>
                     <div className="timeline-institution">
-                      <Building size={14} className="inst-icon" />
+                      <Building size={13} className="inst-icon flex-shrink-0" />
                       <span>{item.institution}</span>
                     </div>
                   </div>
 
                   <div className="timeline-badges-group">
                     <span className="timeline-period-badge">
-                      <Calendar size={13} />
+                      <Calendar size={12} />
                       <span>{item.period}</span>
                     </span>
                     <span className={`timeline-grade-badge ${item.badge.includes('8.1') ? 'highlight' : ''}`}>
-                      <Award size={13} />
+                      <Award size={12} />
                       <span>{item.grade}</span>
                     </span>
                   </div>
